@@ -1,0 +1,25 @@
+{
+  "clientId": "28caf7ec-6752-4897-b5d4-c760bcf4b15f",
+  "clientSecret": "c2a8c831-009c-4da6-bf96-bc9b273ed010",
+  "subscriptionId": "4d34293e-e544-4865-887d-b49c169bf080",
+  "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+  "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
+  "resourceManagerEndpointUrl": "https://management.azure.com/",
+  "activeDirectoryGraphResourceId": "https://graph.windows.net/",
+  "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
+  "galleryEndpointUrl": "https://gallery.azure.com/",
+  "managementEndpointUrl": "https://management.core.windows.net/"
+}
+
+DefaultEndpointsProtocol=https;AccountName=ghgovenvnotsecrets;AccountKey=FEnJgGRtMn9nx5LaAsCtYtLItp1am1uuxEt6/yXU5HisuxMauikaNafw3rVLIBaCyNLx31L7i0FggJudpHM8KA==;EndpointSuffix=core.windows.net
+
+PS C:\Users\pfisher\source\repos\onemtc-governance-script-sandbox> az storage entity insert --connection-string "DefaultEndpointsProtocol=https;AccountName=ghgovenvnotsecrets;AccountKey=FEnJgGRtMn9nx5LaAsCtYtLItp1am1uuxEt6/yXU5HisuxMauikaNafw3rVLIBaCyNLx31L7i0FggJudpHM8KA==;EndpointSuffix=core.windows.net" --entity PartitionKey=totestvariables RowKey=resourcegroupname Content=ghgovenvtest --table-name pipelinevariables
+"W/\"datetime'2020-07-01T19%3A27%3A10.3929973Z'\""
+PS C:\Users\pfisher\source\repos\onemtc-governance-script-sandbox> az storage entity insert --connection-string "DefaultEndpointsProtocol=https;AccountName=ghgovenvnotsecrets;AccountKey=FEnJgGRtMn9nx5LaAsCtYtLItp1am1uuxEt6/yXU5HisuxMauikaNafw3rVLIBaCyNLx31L7i0FggJudpHM8KA==;EndpointSuffix=core.windows.net" --entity PartitionKey=totestvariables RowKey=location Content=eastus2 --table-name pipelinevariables
+"W/\"datetime'2020-07-01T19%3A27%3A33.1577733Z'\""
+PS C:\Users\pfisher\source\repos\onemtc-governance-script-sandbox> az storage entity insert --connection-string "DefaultEndpointsProtocol=https;AccountName=ghgovenvnotsecrets;AccountKey=FEnJgGRtMn9nx5LaAsCtYtLItp1am1uuxEt6/yXU5HisuxMauikaNafw3rVLIBaCyNLx31L7i0FggJudpHM8KA==;EndpointSuffix=core.windows.net" --entity PartitionKey=totestvariables RowKey=appserviceplanname Content=asplan-totestghgovenv --table-name pipelinevariables
+"W/\"datetime'2020-07-01T19%3A28%3A28.5910332Z'\""
+
+PS C:\Users\pfisher\source\repos\onemtc-governance-script-sandbox> az storage entity show --connection-string "DefaultEndpointsProtocol=https;AccountName=ghgovenvnotsecrets;AccountKey=FEnJgGRtMn9nx5LaAsCtYtLItp1am1uuxEt6/yXU5HisuxMauikaNafw3rVLIBaCyNLx31L7i0FggJudpHM8KA==;EndpointSuffix=core.windows.net" --table-name pipelinevariables --partition-key totestvariables --row-key resourcegroupname --select Content --query "Content" -o tsv
+
+az storage account keys list -g ghgovenv -n ghgovenvnotsecrets --query "[0].{value:value}" -o tsv
