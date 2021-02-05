@@ -46,12 +46,22 @@ It take the following parameters, and is set up with the following defaults:
 
     param($rgroupname="ghgovenv", $location="eastus2", $appServicePlanSpecName="GHGovDemoAppServicePlan", $appServiceSpecName="GHGovDemoAppService", $version="1.0", $appServicePlanTemplate="./AppServicePlanDeployment/azuredeploy.json", $appServiceTemplate="./AppServiceDeployment/azuredeploy.json")
 
-3. You will need to set up table storage in Azure to hold variables used by the actions.  This is detailed in the **governance-script-demo**.  For this repo, we merely added 4 new variables to the table storage:
+The Template Spec names ance version swill be stored in Azure Table storage in step #5.  You can use whatever values you desire.  You can also use any resource group for them, but the resource group must exist.
+
+4. Once the Template Specs are created, you can deploy them using the script \Code To Push To Environments\App Service Web App\Template Spec Deployment Script.ps1
+
+    param($specrgroupname="ghgovenv", $preprodrgroupname="ghgovenvpreprod", $prodrgroupname="ghgovenvprod", $appServicePlanSpecName="GHGovDemoAppServicePlan", $appServiceSpecName="GHGovDemoAppService", $version="1.0", $location="eastus2", $subscriptionid="4d34293e-e544-4865-887d-b49c169bf080")
+    
+You can change the parameters, if you desire, but the spec names, versions, and spec resource group need to match the creation script.
+
+5. You will need to set up table storage in Azure to hold variables used by the actions.  This is detailed in the **governance-script-demo**.  For this repo, we merely added 4 new variables to the table storage:
 
 * appserviceplantemplatespec
 * appserviceplantemplatespecversion
 * appservicetemplatespec
 * appservicetemplatespecversion
+
+Which sshould match up with what you used in steps #3 and #4, above.
 
 
 
