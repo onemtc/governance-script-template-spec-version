@@ -30,7 +30,28 @@ Assuming that you are familiar with the **governance-script demo**, this demo is
 ### Instructions
 
 1. You need to configure this with an Azure account.  It is not supplied.  However, the costs are truely minimal, so you can use yor AIA or Center subscription.
-2. Copy/clone the repo.  If you are not putting it in GH Enterprise, you need to make it public if you want to run manual approvals.  
+2. Copy/clone the repo.  If you are not putting it in GH Enterprise, you need to make it public if you want to run manual approvals. 
+
+Note that there are three actions that you may want to modify when you are setting up this demo.  These are:
+
+* gu_deploytotest.yml
+* gu_deploytopreprod.yml
+* gu_deploytoprod.yml
+
+Or if you follow the example configuration, you could use them as is.
+
+3. In this repo, you will find a script \Code To Push To Environments\App Service Web App\Template Spec Creation Script.ps1
+
+It take the following parameters, and is set up with the following defaults:
+
+'param($rgroupname="ghgovenv", $location="eastus2", $appServicePlanSpecName="GHGovDemoAppServicePlan", $appServiceSpecName="GHGovDemoAppService", $version="1.0", $appServicePlanTemplate="./AppServicePlanDeployment/azuredeploy.json", $appServiceTemplate="./AppServiceDeployment/azuredeploy.json")'
+
+3. You will need to set up table storage in Azure to hold variables used by the actions.  This is detailed in the **governance-script-demo**.  For this repo, we merely added 4 new variables to the table storage:
+
+* appserviceplantemplatespec
+* appserviceplantemplatespecversion
+* appservicetemplatespec
+* appservicetemplatespecversion
 
 
 
