@@ -69,14 +69,25 @@ A working configuration looks like:
 
 ![Table Storave Variable Example](/images/GH-Table-Storage-Variables.png)
 
+Note that at the top if each if the actions, the parameters that define the location of table storage are specified.  You will need to make sure the actions match the actual location and storage parameters:
 
+* baselineResourceGroup: ghgovenv
+* baselineVariableStorageAccountName: ghgovenvnotsecrets
+* baselineVariableTableName: pipelinevariables
+* baselineTablePartitionKey: totestvariables
 
+6.  Create an Azure Service Principal in the CLI.
 
-	 Create a secret with your Azure Service Principal.  If you do not want to change the actions, you'd need to call it: PF_AZURE_CREDENTIALS
-	Create a PAT.  If you don't want to change the actions, you'd need to call it: REPO_DISPATCH.  It needs full permissions on the repo, but that's it.  Remeber to enable SSO for OneMtc
-	If you want to demo manual approvals, create an environment called govdemo.  There is one there already, but I do not think environments come over on a clone.  Add a reviewer
-	You need to create table storage with variables.  The instructions for this are in the original instructions.  You use the same table storage for both, but with 4 more variables added under teh "totestvariables" partition: appserviceplantemplatespec, appserviceplantemplatespecversion, appservicetemplatespec, and appservicetemplatespecversion.  These are the names and version of the template specs that you are going to create
-	There are two scripts.  The first creates the template specs.  Run this from your local machine.  You may have to change the parameters, to match your azure resource groups and the above names and versions.  It's powershell calling CLI, real simple.  The second creates the app service plan and app service for preprod and prod.  Test is created a IaC from the action.
-	Then just run the test action.  It should run all three, creating the environment from scratch for test, and just pushing the code for preprod and prod.  You should get a manual approval request before both preprod and prod are run.
+Use az ad sp create-for-rbac for this.  An example is:
+
+    az ad sp create-for-rbac --name "myApp" --role contributor --scopes /subscriptions/<subscription-id>/resourceGroups/<group-name> --sdk-auth
+    
+Then take the entire output and store it as a GitHub Secret in your repo called **AZURE_CREDENTIALS**.  If you store it with a different name, you must modify the three actions to match
+
+7.  Create a PAT in the GitHub developer interface.  Call it **REPO_DISPATCH** or else you will need to modify the actions to match.  It needs full permissions on the repo, but that's it.  If you are doing this in OneMtc, you must Enable SSO.
+8.  If you want to demo manual approvals, create an environment called govdemo.  Add up to 6 reviewers.  Note that the approval options are limited, all that is available is 1) 1 of (up to) 6 users approving allow the action to be approved, and 2) if not approved in 30 days, the action is cancelled.  No other durations are supported.
+
+And you are done.  If you run the test action from the GitHub Actions web page, it will run, deploy the environment, and then deploy the code.  There will be a manual approval wait, and once approved, preprod will run and deploy the code to the environment deployed by the Template Spec.  Prod then mimics preprod.  Note that if you run preprod or prod directly from the actions page, the first thing it will do is wait for approval, even if you are an approver.
+
 
 
