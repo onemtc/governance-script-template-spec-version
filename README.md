@@ -46,15 +46,15 @@ It take the following parameters, and is set up with the following defaults:
 
     param($rgroupname="ghgovenv", $location="eastus2", $appServicePlanSpecName="GHGovDemoAppServicePlan", $appServiceSpecName="GHGovDemoAppService", $version="1.0", $appServicePlanTemplate="./AppServicePlanDeployment/azuredeploy.json", $appServiceTemplate="./AppServiceDeployment/azuredeploy.json")
 
-The Template Spec names ance version swill be stored in Azure Table storage in step #5.  You can use whatever values you desire.  You can also use any resource group for them, but the resource group must exist.
+The Template Spec names ance version swill be stored in Azure Table storage in step #5.  You can use whatever values you desire.  You can also use any resource group for them, but the resource group must exist.  Log in to the CLI from a local PowerShell window to run the script.
 
 4. Once the Template Specs are created, you can deploy them using the script \Code To Push To Environments\App Service Web App\Template Spec Deployment Script.ps1
 
-You can change the parameters, if you desire, but the spec names, versions, and spec resource group need to match the creation script.
+You can change the parameters, if you desire, but the spec names, versions, and spec resource group need to match the creation script.  You **must** put the subscriptionId in, as this is the subscription to which you are deploying.  For this demo, you are probably deploying to the same subscription under which you are logged in, but the Template Spec API requires it to be specificed
 
     param($specrgroupname="ghgovenv", $preprodrgroupname="ghgovenvpreprod", $prodrgroupname="ghgovenvprod", $appServicePlanSpecName="GHGovDemoAppServicePlan", $appServiceSpecName="GHGovDemoAppService", $version="1.0", $location="eastus2", $subscriptionid="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
     
-
+For the demo, it may be advantageous to have preprod already set up, but then show the customers how you deploy to prod.    
 
 5. You will need to set up table storage in Azure to hold variables used by the actions.  This is detailed in the **governance-script-demo**.  For this repo, we merely added 4 new variables to the table storage:
 
@@ -63,7 +63,12 @@ You can change the parameters, if you desire, but the spec names, versions, and 
 * appservicetemplatespec
 * appservicetemplatespecversion
 
-Which sshould match up with what you used in steps #3 and #4, above.
+Which must match up with what you used in steps #3 and #4, above.
+
+A working configuration looks like:
+
+![Table Storave Variable Example](/images/GH-Table-Storage-Variables.png)
+
 
 
 
