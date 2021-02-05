@@ -11,6 +11,13 @@ This repo substitutes Azure Template Specs for Azure Blueprints.  However, as of
 General documentation is here:
 
 [Azure Blueprints](https://docs.microsoft.com/en-us/azure/governance/blueprints/overview)
+
 [Azure Template Specs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs?tabs=azure-powershell)
 
-A full overview of the **governance-script demo** can be found here [CET Catalog Entry](https://microsoft.sharepoint.com/teams/cecontent/SitePages/Azure%20Environment%20Governance%20with%20GitHub%20and%20Azure%20Blueprints.aspx)
+A full overview of the **governance-script demo** can be found here 
+
+[CET Catalog Entry](https://microsoft.sharepoint.com/teams/cecontent/SitePages/Azure%20Environment%20Governance%20with%20GitHub%20and%20Azure%20Blueprints.aspx)
+
+With the exception of the video walkthrough, all of the other artifacts from the CET Catalog are also stored in the repo
+
+## This Repo
