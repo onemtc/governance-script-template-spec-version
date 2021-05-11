@@ -20,6 +20,9 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
         
+    - name: ver
+      run: az --version
+        
     - name: Deploy App Service Plan to Azure
       run: az deployment group create -g bicep --template-file ../bicep/appserviceplan.bicep --parameters aspName=asp-biceptestaspps27res
     
