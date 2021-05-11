@@ -36,7 +36,7 @@ jobs:
       run: az --version
       
     - name: az upgrade
-      run: az upgrade
+      run: az upgrade --yes
         
     - name: az version
       run: az --version
