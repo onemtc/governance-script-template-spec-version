@@ -12,6 +12,15 @@ jobs:
   buildbicepappserviceplpan:
     runs-on: ubuntu-latest
     
+    steps:
+    - name: Azure Login
+      uses: Azure/login@v1.1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+        
+    - name: Deploy App Service Plan to Azure
+      run: az deployment group create -g bicep --template-file bicep\appserviceplan.bicep aspName=asp-biceptestaspps27res
+    
   
     
     
