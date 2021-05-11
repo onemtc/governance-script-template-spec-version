@@ -6,7 +6,7 @@ This is an updated version of **governance-script** repo (https://github.com/one
 
 The **governance-script** repo details how to deploy code to Azure into test, preprod, and production environments, using IaC with GitHub actions for Test Deployment.  For Preprod/Prod deployment, the code is deployed through actions, but the infrastructure is placed in Azure through Azure Blueprints.  Azure Blueprints should be demo'd along with the **governance-script demo**, so you can show all the goodness of GitHub actions, as well as the advanced features of Azure Blueprints/
 
-This repo substitutes Azure Template Specs for Azure Blueprints.  However, as of this writing Template Specs is in preview and the functionality provided is much, much smaller than that of Azure Blueprints, and there is no direct link available between the two.  This repo should be used to demo the future of ARM Template handline within Azure, but it is not currently a replacement for Azure Blueprints.
+This repo substitutes Azure Template Specs for Azure Blueprints.  However, as of this writing Template Specs functionality provided is not the same as that of Azure Blueprints, and there is no direct link available between the two.  This repo should be used to demo the future of ARM Template handling within Azure, but it is not currently a replacement for Azure Blueprints.
 
 General documentation is here:
 
