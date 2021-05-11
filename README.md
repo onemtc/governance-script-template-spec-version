@@ -29,7 +29,7 @@ Assuming that you are familiar with the **governance-script demo**, this demo is
 
 ### Instructions
 
-1. You need to configure this with an Azure account.  It is not supplied.  However, the costs are truely minimal, so you can use yor AIA or Center subscription.
+1. You need to configure this with an Azure account.  It is not supplied.  However, the costs are truly minimal, so you can use yor AIA or Center subscription.
 2. Copy/clone the repo.  If you are not putting it in GH Enterprise, you need to make it public if you want to run manual approvals. 
 
 Note that there are three actions that you may want to modify when you are setting up this demo.  These are:
