@@ -32,6 +32,9 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
         
+    - name: az version
+      run: az --version
+        
     - name: Get Primary Storage Key
       run: echo "STORAGE_KEY=$(az storage account keys list -g $baselineResourceGroup -n $baselineVariableStorageAccountName --query "[0].{value:value}" -o tsv)" >> $GITHUB_ENV 
       
