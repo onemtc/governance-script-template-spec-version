@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - uses: actions/checkout@v2.3.4
+      with:
+        ref: REPO_DISPATCH
+  
     - name: Azure Login
       uses: Azure/login@v1.1
       with:
