@@ -30,7 +30,7 @@ jobs:
       run: echo "TSNAME=$(az storage entity show --connection-string $CONNECTION_STRING --table-name $baselineVariableTableName --partition-key $baselineTablePartitionKey --row-key appserviceplantemplatespec --select Content --query "Content" -o tsv)" >> $GITHUB_ENV
  
     - name: Get the existing template spec ID
-      run: echo "TSID=$(az ts show -g baselineResourceGroup --name $TSNAME --query id -o tsv)" >> $GITHUB_ENV
+      run: echo "TSID=$(az ts show -g $baselineResourceGroup --name $TSNAME --query id -o tsv)" >> $GITHUB_ENV
 
     - name: Transpile the bicep file
       working-directory: ./bicep
