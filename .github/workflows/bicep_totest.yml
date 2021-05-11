@@ -20,7 +20,7 @@ jobs:
         
     - name: Deploy App Service Plan to Azure
       working-directory: ./bicep
-      run: az deployment group create -g bicep --template-file ./appserviceplan.bicep --parameters aspName=asp-biceptestaspps27res
+      run: az deployment group create -g bicep --template-file .\appserviceplan.bicep --parameters aspName=asp-biceptestaspps27res
     
   
     
