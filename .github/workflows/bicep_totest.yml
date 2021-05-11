@@ -38,7 +38,7 @@ jobs:
       
     - name: Update the template spec
       working-directory: ./bicep
-      run: az ts update --template-spec $TSID -f ./appserviceplan-specloc.json
+      run: az ts update --template-spec $TSID -f ./appserviceplan-specloc.json --yes
  
       
 # This works        
