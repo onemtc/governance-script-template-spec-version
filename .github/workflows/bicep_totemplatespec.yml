@@ -1,4 +1,4 @@
-name: bicep_totest.yml
+name: bicep_totemplatespec.yml
 
 on: [workflow_dispatch]
 
