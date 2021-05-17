@@ -1,0 +1,52 @@
+name: bicep_totemplatespec.yml
+
+on: [workflow_dispatch]
+
+env:
+  baselineResourceGroup: ghgovenv
+  baselineVariableStorageAccountName: ghgovenvnotsecrets
+  baselineVariableTableName: pipelinevariables
+  baselineTablePartitionKey: totestvariables
+  
+jobs:
+  buildbicepappserviceplpan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2.3.4
+  
+    - name: Azure Login
+      uses: Azure/login@v1.1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+ 
+    - name: Get Primary Storage Key
+      run: echo "STORAGE_KEY=$(az storage account keys list -g $baselineResourceGroup -n $baselineVariableStorageAccountName --query "[0].{value:value}" -o tsv)" >> $GITHUB_ENV 
+        
+    - name: Set Storage Connection String
+      run: echo "CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=$baselineVariableStorageAccountName;AccountKey=$STORAGE_KEY;EndpointSuffix=core.windows.net" >> $GITHUB_ENV 
+     
+    - name: Get App Service Plan Template Spec Name from the variable table
+      run: echo "TSNAME=$(az storage entity show --connection-string $CONNECTION_STRING --table-name $baselineVariableTableName --partition-key $baselineTablePartitionKey --row-key appserviceplantemplatespec --select Content --query "Content" -o tsv)" >> $GITHUB_ENV
+ 
+    - name: Get the existing template spec ID
+      run: echo "TSID=$(az ts show -g $baselineResourceGroup --name $TSNAME --query id -o tsv)" >> $GITHUB_ENV
+
+    - name: Transpile the bicep file
+      working-directory: ./bicep
+      run: az bicep build --file ./appserviceplan-specloc.bicep
+      
+    - name: Update the template spec
+      working-directory: ./bicep
+      run: az ts update --template-spec $TSID -f ./appserviceplan-specloc.json --yes
+ 
+      
+# This works        
+#   - name: Deploy App Service Plan to Azure
+#      working-directory: ./bicep
+#      run: az deployment group create -g bicep --template-file ./appserviceplan.bicep --parameters aspName=asp-biceptestaspps27res
+    
+  
+    
+    
+  
