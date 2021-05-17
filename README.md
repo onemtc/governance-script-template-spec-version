@@ -8,11 +8,15 @@ The **governance-script** repo details how to deploy code to Azure into test, pr
 
 This repo substitutes Azure Template Specs for Azure Blueprints.  However, as of this writing Template Specs functionality provided is not the same as that of Azure Blueprints, and there is no direct link available between the two.  This repo should be used to demo the future of ARM Template handling within Azure, but it is not currently a replacement for Azure Blueprints.
 
+This repo also contains a demo of using the Bicep language to create a Template Spec.
+
 General documentation is here:
 
 [Azure Blueprints](https://docs.microsoft.com/en-us/azure/governance/blueprints/overview)
 
 [Azure Template Specs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs?tabs=azure-powershell)
+
+[Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/bicep-overview)
 
 A full overview of the **governance-script demo** can be found here 
 
@@ -88,6 +92,12 @@ Then take the entire output and store it as a GitHub Secret in your repo called 
 8.  If you want to demo manual approvals, create an environment called govdemo.  Add up to 6 reviewers.  Note that the approval options are limited, all that is available is 1) 1 of (up to) 6 users approving allow the action to be approved, and 2) if not approved in 30 days, the action is cancelled.  No other durations are supported.
 
 And you are done.  If you run the test action from the GitHub Actions web page, it will run, deploy the environment, and then deploy the code.  There will be a manual approval wait, and once approved, preprod will run and deploy the code to the environment deployed by the Template Spec.  Prod then mimics preprod.  Note that if you run preprod or prod directly from the actions page, the first thing it will do is wait for approval, even if you are an approver.
+
+### Bicep
+
+The repo also contains an action called bicep_totemplatespec.yml.  This action transpiles a bicep file for an App Service Plan and stores the resulting ARM Template as a Template Spec in Azure, replacing that used by the above demo.  This way, you can run the bicep action first, and then continue with the demo.  It uses the same table storage for variable retrieval as the other parts of the demo, but does not need any additional entries.  Note that it actually replaces the Template Spec version, it does not update the version number.
+
+Additionally, in the bicep directory in the repo are a few other bicep files.  All have been tested and work, but are not directly part of the Template Spec/demo workflow.
 
 
 
